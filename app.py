@@ -11,22 +11,27 @@ st.set_page_config(
 st.title("🔍 Autonomous Visual Inspection System")
 st.write("AI-powered PCB defect detection using YOLOv8.")
 
+
 @st.cache_resource
 def load_model():
     return YOLO("best.pt")
 
+
 model = load_model()
+
 
 uploaded_file = st.file_uploader(
     "Upload a PCB image",
     type=["jpg", "jpeg", "png"]
 )
 
+
 if uploaded_file is not None:
 
     image = Image.open(uploaded_file)
 
     st.subheader("Uploaded PCB")
+
     st.image(
         image,
         caption="Input PCB Image",
@@ -58,7 +63,9 @@ if uploaded_file is not None:
 
         if len(detections) == 0:
 
-            st.success("✅ No defects detected.")
+            st.success(
+                "✅ No defects detected."
+            )
 
         else:
 
